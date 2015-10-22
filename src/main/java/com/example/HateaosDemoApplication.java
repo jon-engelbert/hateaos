@@ -1,17 +1,9 @@
 package com.example;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
 import javax.naming.NamingException;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,80 +55,6 @@ class BookingCommandLineRunner implements CommandLineRunner {
 		
 	}
 }
-
-@RestController
-class BookingRestController {
-	@Autowired 
-	private CustomerRepo CustomerRepo;
-	@RequestMapping("/customers")
-	Collection<Customer> Bookings() {
-		return this.CustomerRepo.findAll();
-	}
-	
-	@Autowired 
-	private FlightRepo flightRepo;
-	@RequestMapping("/flights")
-	Collection<Flight> Flights() {
-		return this.flightRepo.findAll();
-	}
-}
-
-@Entity
-class Flight {
-	public Flight() {
-	}
-	public Flight(String flightName) {
-		this.name = flightName;
-		this.customers = new ArrayList<Customer>();
-	}
-	@Id @GeneratedValue
-	private Long id;
-	private String name;
-	@ManyToMany
-	private Collection<Customer> customers;
-	@Override
-	public String toString() {
-		return "Flight [flightName=" + name + "]";
-	}
-	public String getName() {
-		return name;
-	}
-	public Collection<Customer> getCustomers() {
-		return customers;
-	}
-}
-
-@Entity
-class Customer {
-	public Customer() {
-	}
-	public Customer(String name) {
-		this.name = name;
-		this.flights = new ArrayList<Flight>();
-	}
-	@Id @GeneratedValue
-	private Long id;
-	private String name;
-    @JoinTable(name = "customer_flights", joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "flight_id", referencedColumnName = "id") )
-	@ManyToMany	(fetch = FetchType.EAGER)
-	private Collection<Flight> flights;
-	public Long getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public Collection<Flight> getFlights() {
-		return flights;
-	}
-	@Override
-	public String toString() {
-		return "Customer [customerName=" + name + "]";
-	}
-}
-
 
 @Configuration
 @ComponentScan(basePackages = { "com.example" })
