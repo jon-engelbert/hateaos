@@ -48,9 +48,9 @@ class BookingCommandLineRunner implements CommandLineRunner {
 	public void run(String... arg0) throws Exception {
 		for (Customer c : this.customerRepo.findAll()) {
 			System.out.println(c.toString());
-			for (Flight f : c.getFlights()) {
-				System.out.println(f.toString());
-			}
+//			for (Flight f : c.getFlights()) {
+//				System.out.println(f.toString());
+//			}
 		}
 		
 	}
