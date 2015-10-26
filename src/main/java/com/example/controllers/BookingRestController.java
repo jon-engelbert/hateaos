@@ -1,4 +1,4 @@
-package com.example;
+package com.example.controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,23 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Flight;
 import com.example.dto.CustomerDto;
 import com.example.dto.FlightDto;
+import com.example.repository.FlightRepo;
 
 @RestController
 public class BookingRestController {
-	@Autowired 
-	private CustomerRepo customerRepo;
-	@RequestMapping("/customers")
-	Collection<CustomerDto> Bookings() {
-		Collection<CustomerDto> customerDtos = new ArrayList<CustomerDto>();
-		Collection<Customer> customers = this.customerRepo.findAll();
-		for (Customer customer: customers) {
-			customerDtos.add(CustomerDto.CreateFromEntity(customer));
-		}
-		System.out.println("customers size: " + customerDtos.size());
-		return customerDtos;
-	}
 	
 	@Autowired 
 	private FlightRepo flightRepo;

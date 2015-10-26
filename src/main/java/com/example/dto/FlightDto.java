@@ -6,8 +6,8 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.Customer;
-import com.example.CustomerRepo;
 import com.example.Flight;
+import com.example.repository.CustomerRepo;
 
 public class FlightDto {
 	@Autowired

@@ -26,6 +26,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.repository.CustomerRepo;
+
 @SpringBootApplication
 public class HateaosDemoApplication {
 
@@ -57,7 +59,7 @@ class BookingCommandLineRunner implements CommandLineRunner {
 }
 
 @Configuration
-@ComponentScan(basePackages = { "com.example" })
+@ComponentScan(basePackages = { "com.example", "com.example.service" })
 //@PropertySource("classpath:email.properties")
 class AppConfig {
 }

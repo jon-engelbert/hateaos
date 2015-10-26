@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.Customer;
 import com.example.Flight;
-import com.example.FlightRepo;
+import com.example.repository.FlightRepo;
 
 public class CustomerDto {
 	@Autowired
@@ -30,8 +30,10 @@ public class CustomerDto {
 	
 	public void CopyToEntity(Customer cust)
 	{
+		System.out.println("in CopyToEntity " );
 		cust.setName(this.getName());
 		for (String fltName : this.getFlightNames()) {
+			System.out.println("flight name in CopyToEntity: " + fltName);
 			Collection<Flight> custFlights = flightRepo.findByName(fltName);
 			custFlights.forEach(flight -> cust.getFlights().add(flight));
 		}
@@ -53,6 +55,12 @@ public class CustomerDto {
 	}
 	public void setFlightNames(Collection<String> flight_names) {
 		this.flightNames = flight_names;
+	}
+
+	@Override
+	public String toString() {
+		return "CustomerDto [id=" + id + ", name=" + name + ", flightNames="
+				+ flightNames + "]";
 	}
 	
 }
