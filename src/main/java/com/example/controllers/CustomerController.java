@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.example.Customer;
+import com.example.Exceptions.CustomerNotFoundException;
 import com.example.dto.CustomerDto;
 import com.example.repository.CustomerRepo;
 import com.example.service.ICustomerService;
@@ -44,19 +44,31 @@ public class CustomerController {
 	
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public CustomerDto get(@PathVariable("id") Long id) {
-    	Customer customer = customerService.findOne(id);
+    	Customer customer;
+		try {
+			customer = customerService.findById(id);
+		} catch (CustomerNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 		CustomerDto customerDto = CustomerDto.CreateFromEntity(customer);
         return customerDto;
     }
 	
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long  id) {
+    public Customer delete(@PathVariable("id") Long  id) {
     	System.out.println("deleting customer:" + id);
+    	Customer deleted = null;
 //    	Long id = Long.parseLong(idStr);
-    	Customer customer = customerService.findOne(id);
-		CustomerDto customerDto = CustomerDto.CreateFromEntity(customer);
-		customerService.delete(id);
-        //return customerDto;
+		try {
+			 deleted = customerService.deleteById(id);
+		} catch (CustomerNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return deleted;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)

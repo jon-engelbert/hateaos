@@ -3,7 +3,9 @@
 -- Table `customer`
 -- -----------------------------------------------------
 
+--drop table if exists customer_flights;
 --drop table if exists customer ;
+--drop table if exists flight ;
 
 create table if not exists customer (
   id SERIAL PRIMARY KEY,
@@ -15,7 +17,6 @@ create table if not exists customer (
 -- Table `flight`
 -- -----------------------------------------------------
 
---drop table if exists flight ;
 
 create table if not exists flight (
   id SERIAL PRIMARY KEY,
@@ -23,7 +24,6 @@ create table if not exists flight (
   );
 --COMMENT = 'maintains flight details';
 
---drop table if exists customer_flights;
 
 --create table customer_flights (
 --  `customer_id` INT UNSIGNE NOT NULL ,

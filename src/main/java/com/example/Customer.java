@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -20,10 +21,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Customer {
 	public static final int MAX_STRING_SIZE = 45;
 	public Customer() {
+		this.flights = new ArrayList<Flight>();
 	}
 	public Customer(String name) {
 		this.name = name;
-		// this.flights = new ArrayList<Flight>();
+		this.flights = new ArrayList<Flight>();
 	}
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	

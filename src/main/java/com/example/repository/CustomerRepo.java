@@ -12,5 +12,5 @@ import com.example.Customer;
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
 	Collection<Customer> findByName(String name);
-	List<Customer> findAll();
+//	List<Customer> findAll();
 }
